@@ -13,13 +13,27 @@ export const getProfileInfo = createAsyncThunk(
   }
 );
 
+export const getProfileRepos = createAsyncThunk(
+  "profile/repos",
+  async (user: string, { rejectWithValue }) => {
+    try {
+      const response = await profileService.getUserRepos(user);
+      return response;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
 interface ProfileState {
-  data: [];
+  info: [];
+  repos: [];
   loading: "idle" | "success" | "fail" | "pending";
 }
 
 const initialState = {
-  data: [],
+  info: [],
+  repos: [],
   loading: "idle",
 } as ProfileState;
 
@@ -30,13 +44,24 @@ const profileSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getProfileInfo.fulfilled, (state, action) => {
-        state.data = action.payload;
+        state.info = action.payload;
         state.loading = "success";
       })
       .addCase(getProfileInfo.rejected, (state) => {
         state.loading = "fail";
       })
       .addCase(getProfileInfo.pending, (state) => {
+        state.loading = "pending";
+      });
+    builder
+      .addCase(getProfileRepos.fulfilled, (state, action) => {
+        state.repos = action.payload;
+        state.loading = "success";
+      })
+      .addCase(getProfileRepos.rejected, (state) => {
+        state.loading = "fail";
+      })
+      .addCase(getProfileRepos.pending, (state) => {
         state.loading = "pending";
       });
   },

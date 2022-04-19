@@ -11,12 +11,15 @@ import {
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import SearchInput from "./components/SearchInput";
+import SkeletonBody from "./components/SkeletonBody";
+import { useAppSelector } from "./store/hooks";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 function App() {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
+  const selector = useAppSelector((state) => state);
 
   return (
     <Box
@@ -74,6 +77,7 @@ export default function ToggleColorMode() {
         <Container>
           <App />
           <SearchInput />
+          <SkeletonBody />
         </Container>
       </ThemeProvider>
     </ColorModeContext.Provider>
