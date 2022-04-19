@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactEventHandler } from "react";
 import {
   Box,
   Button,
@@ -6,6 +6,8 @@ import {
   Typography,
   Snackbar,
   Stack,
+  ClickAwayListener,
+  useTheme,
 } from "@mui/material";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import PageviewRoundedIcon from "@mui/icons-material/PageviewRounded";
@@ -21,26 +23,42 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 export default function SearchInput() {
   const [profileName, setProfileName] = React.useState("");
+  const [emptyInput, setEmptyInput] = React.useState(false);
   const dispatch = useAppDispatch();
+  const themePalette = useTheme().palette.mode;
 
   const searchProfile: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
-    setProfileName(e.target.value);
+    if (e.target.value.match("^[a-zA-Z0-9 ]*$") != null) {
+      setEmptyInput(false);
+      setProfileName(e.target.value);
+    }
+    if (e.target.value === "") setEmptyInput(true);
+  };
+
+  const fetchProfileEnterKey: React.KeyboardEventHandler<HTMLInputElement> = (
+    e
+  ) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      fetchProfile();
+    }
   };
 
   const fetchProfile = () => {
-    dispatch(getProfileInfo(profileName));
-    dispatch(getProfileRepos(profileName));
+    if (profileName != "") {
+      dispatch(getProfileInfo(profileName));
+      dispatch(getProfileRepos(profileName));
+    }
   };
 
-  // * Snack bar
+  // * SNACKBAR
   const isPending =
     useAppSelector((state) => state.profile.loading) === "pending";
   const isSuccess = useAppSelector(
     (state) => state.profile.loading === "success"
   );
   const isFail = useAppSelector((state) => state.profile.loading === "fail");
-  const isIdle = useAppSelector((state) => state.profile.loading === "idle");
 
   const [open, setOpen] = React.useState(true);
 
@@ -55,9 +73,13 @@ export default function SearchInput() {
     setOpen(false);
   };
 
+  const handleClickAway = () => {
+    setOpen(false);
+  };
+
   React.useEffect(() => {
     setOpen(true);
-  }, [dispatch, isFail, isSuccess, isIdle, isPending]);
+  }, [dispatch, isFail, isSuccess, isPending]);
 
   const snackbarRender = () => {
     if (isSuccess) {
@@ -76,14 +98,6 @@ export default function SearchInput() {
       );
     }
 
-    if (isIdle) {
-      return (
-        <Alert onClose={handleClose} severity="info" sx={{ width: "100%" }}>
-          Write your github username!
-        </Alert>
-      );
-    }
-
     if (isPending) {
       return (
         <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
@@ -91,6 +105,12 @@ export default function SearchInput() {
         </Alert>
       );
     }
+
+    return (
+      <Alert onClose={handleClose} severity="info" sx={{ width: "100%" }}>
+        Write your github username!
+      </Alert>
+    );
   };
 
   return (
@@ -107,7 +127,8 @@ export default function SearchInput() {
         sx={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "flex-end",
+          alignItems: "center",
+          alignContent: "center",
           flexDirection: "row",
         }}
       >
@@ -118,12 +139,18 @@ export default function SearchInput() {
           variant="standard"
           value={profileName}
           onChange={searchProfile}
+          error={emptyInput}
+          helperText={
+            profileName === "" ? "Write username" : "Hit search or enter!"
+          }
+          onKeyUp={fetchProfileEnterKey}
         />
         <Button
           onClick={fetchProfile}
-          color="success"
+          color={themePalette === "dark" ? "success" : "primary"}
           sx={{
             px: 2,
+
             ml: 2,
           }}
           startIcon={<PageviewRoundedIcon />}
@@ -131,16 +158,18 @@ export default function SearchInput() {
           Search
         </Button>
       </Box>
-      <Stack spacing={2} sx={{ width: "100%" }}>
-        <Snackbar
-          open={open}
-          autoHideDuration={6000}
-          onClose={handleClose}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        >
-          {snackbarRender()}
-        </Snackbar>
-      </Stack>
+      <ClickAwayListener onClickAway={handleClickAway}>
+        <Stack spacing={2} sx={{ width: "100%" }}>
+          <Snackbar
+            open={open}
+            autoHideDuration={6000}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          >
+            {snackbarRender()}
+          </Snackbar>
+        </Stack>
+      </ClickAwayListener>
     </>
   );
 }

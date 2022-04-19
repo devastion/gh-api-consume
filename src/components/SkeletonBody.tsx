@@ -11,7 +11,7 @@ export default function SkeletonBody() {
       <Stack
         maxWidth={500}
         spacing={1}
-        mt={10}
+        mt={5}
         mx="auto"
         sx={{
           display: "flex",
