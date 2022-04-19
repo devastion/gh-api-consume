@@ -1,4 +1,4 @@
-import React, { ReactEventHandler } from "react";
+import React from "react";
 import {
   Box,
   Button,
@@ -37,19 +37,19 @@ export default function SearchInput() {
     if (e.target.value === "") setEmptyInput(true);
   };
 
+  const fetchProfile = () => {
+    if (profileName != "") {
+      dispatch(getProfileInfo(profileName));
+      dispatch(getProfileRepos(profileName));
+    }
+  };
+
   const fetchProfileEnterKey: React.KeyboardEventHandler<HTMLInputElement> = (
     e
   ) => {
     if (e.key === "Enter") {
       e.preventDefault();
       fetchProfile();
-    }
-  };
-
-  const fetchProfile = () => {
-    if (profileName != "") {
-      dispatch(getProfileInfo(profileName));
-      dispatch(getProfileRepos(profileName));
     }
   };
 

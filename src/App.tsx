@@ -10,8 +10,11 @@ import {
 } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { useAppSelector } from "./store/hooks";
 import SearchInput from "./components/SearchInput";
 import SkeletonBody from "./components/SkeletonBody";
+import Profile from "./Profile";
 
 const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
@@ -52,7 +55,8 @@ function App() {
 export default function ToggleColorMode() {
   const getLocalStoragePalette = localStorage.getItem("theme") || "dark";
 
-  const validateLocalStoragePalette = (): "dark" | "light" => {
+  // ! Find a way to validate local storage
+  const validateLocalStoragePalette = (): any => {
     if (getLocalStoragePalette != null) {
       if (getLocalStoragePalette === "dark" || "light") {
         return getLocalStoragePalette;
@@ -89,9 +93,19 @@ export default function ToggleColorMode() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container>
-          <App />
-          <SearchInput />
-          <SkeletonBody />
+          <BrowserRouter>
+            <App />
+            <SearchInput />
+            {useAppSelector((state) => state.profile.loading) != "success" ? (
+              <SkeletonBody />
+            ) : (
+              <Profile
+                avatar_url="https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png"
+                profile_info={[]}
+                repos={[]}
+              />
+            )}
+          </BrowserRouter>
         </Container>
       </ThemeProvider>
     </ColorModeContext.Provider>

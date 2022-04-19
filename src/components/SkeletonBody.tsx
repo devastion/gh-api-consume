@@ -25,5 +25,5 @@ export default function SkeletonBody() {
       </Stack>
     );
   }
-  return <></>;
+  return null;
 }

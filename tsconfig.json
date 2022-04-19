@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "es2017",
     "module": "commonjs",
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -8,6 +8,15 @@
     "strict": true,
     "typeRoots": ["node_modules/@types"],
     "jsx": "react-jsx",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node",
+    "incremental": true,
+    "declarationMap": true,
+    "inlineSourceMap": true,
+    "inlineSources": true
   }
 }
