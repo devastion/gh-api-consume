@@ -6,7 +6,8 @@ import { useAppSelector } from "./store/hooks";
 import ProfileInfo from "./components/ProfileInfo";
 
 function TransitionedRouter() {
-  const info = useAppSelector((state) => state.profile.info);
+  const selector = useAppSelector((state) => state.profile.info);
+  const loginName = selector.login;
 
   return (
     <Routes>
@@ -14,7 +15,7 @@ function TransitionedRouter() {
         path="/info"
         element={
           <ProfileInfo
-            login={info.login}
+            login={loginName}
             name={""}
             location={""}
             public_repos={0}
@@ -27,13 +28,10 @@ function TransitionedRouter() {
   );
 }
 
-type Props = {
-  avatar_url: string;
-  profile_info: [];
-  repos: [];
-};
-
-export default function Profile({ avatar_url, profile_info, repos }: Props) {
+export default function Profile() {
+  const profileAvatar = useAppSelector(
+    (state) => state.profile.info.avatar_url
+  );
   const themePalette = useTheme().palette.mode;
   return (
     <Box
@@ -44,7 +42,7 @@ export default function Profile({ avatar_url, profile_info, repos }: Props) {
         mt: 5,
       }}
     >
-      <ProfileAvatar avatar_src={avatar_url} />
+      <ProfileAvatar avatar_src={profileAvatar} />
       <Box
         sx={{
           textDecoration: "none",

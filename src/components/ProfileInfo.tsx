@@ -8,6 +8,7 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
+  minWidth: 250,
 }));
 
 type Props = {
@@ -29,9 +30,9 @@ export default function ProfileInfo({
   const color = themePalette === "dark" ? "success" : "primary";
 
   return (
-    <Stack spacing={1}>
-      <Item>
-        <AccountCircleIcon color={color} />
+    <Stack spacing={1} sx={{ mt: 1 }}>
+      <Item sx={{ display: "flex", alignItems: "center" }}>
+        <AccountCircleIcon color={color} sx={{ mr: 1 }} />
         {login}
       </Item>
     </Stack>
