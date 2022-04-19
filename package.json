@@ -2,11 +2,10 @@
   "name": "gh-api-consume",
   "version": "1.0.0",
   "description": "The frontend of the fullstack project.",
-  "main": "index.js",
   "scripts": {
     "start": "ntl -e start",
     "development": "npm run clean && parcel src/index.html --port 3000",
-    "build": "npm run clean && parcel build src/index.html",
+    "build": "npm run clean && parcel build src/index.html --public-url ./",
     "clean": "rimraf ./dist && rimraf ./.parcel-cache"
   },
   "ntl": {

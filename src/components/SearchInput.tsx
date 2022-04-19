@@ -26,6 +26,7 @@ export default function SearchInput() {
   const [emptyInput, setEmptyInput] = React.useState(false);
   const dispatch = useAppDispatch();
   const themePalette = useTheme().palette.mode;
+  localStorage.setItem("theme", themePalette);
 
   const searchProfile: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();

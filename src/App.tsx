@@ -13,7 +13,9 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import SearchInput from "./components/SearchInput";
 import SkeletonBody from "./components/SkeletonBody";
 
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+const ColorModeContext = React.createContext({
+  toggleColorMode: () => {},
+});
 
 function App() {
   const theme = useTheme();
@@ -48,7 +50,21 @@ function App() {
 }
 
 export default function ToggleColorMode() {
-  const [mode, setMode] = React.useState<"light" | "dark">("dark");
+  const getLocalStoragePalette = localStorage.getItem("theme") || "dark";
+
+  const validateLocalStoragePalette = (): "dark" | "light" => {
+    if (getLocalStoragePalette != null) {
+      if (getLocalStoragePalette === "dark" || "light") {
+        return getLocalStoragePalette;
+      }
+    }
+    return "dark";
+  };
+
+  const [mode, setMode] = React.useState<"light" | "dark">(
+    validateLocalStoragePalette
+  );
+
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
