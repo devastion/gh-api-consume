@@ -13,6 +13,7 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import PageviewRoundedIcon from "@mui/icons-material/PageviewRounded";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { getProfileInfo, getProfileRepos } from "../store/profile/profileSlice";
+import { useNavigate } from "react-router-dom";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -25,6 +26,7 @@ export default function SearchInput() {
   const [profileName, setProfileName] = React.useState("");
   const [emptyInput, setEmptyInput] = React.useState(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const themePalette = useTheme().palette.mode;
   localStorage.setItem("theme", themePalette);
 
@@ -41,6 +43,7 @@ export default function SearchInput() {
     if (profileName != "") {
       dispatch(getProfileInfo(profileName));
       dispatch(getProfileRepos(profileName));
+      navigate("/info");
     }
   };
 
@@ -163,7 +166,7 @@ export default function SearchInput() {
         <Stack spacing={2} sx={{ width: "100%" }}>
           <Snackbar
             open={open}
-            autoHideDuration={6000}
+            autoHideDuration={3000}
             onClose={handleClose}
             anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           >

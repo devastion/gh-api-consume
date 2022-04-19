@@ -2,15 +2,28 @@ import React from "react";
 import ProfileAvatar from "./components/ProfileAvatar";
 import { Box, Button, useTheme } from "@mui/material";
 import { Route, Routes, NavLink } from "react-router-dom";
-import { TransitionGroup } from "react-transition-group";
+import { useAppSelector } from "./store/hooks";
+import ProfileInfo from "./components/ProfileInfo";
 
 function TransitionedRouter() {
+  const info = useAppSelector((state) => state.profile.info);
+
   return (
-    <TransitionGroup>
-      <Routes>
-        <Route path="/info" element=""></Route>
-      </Routes>
-    </TransitionGroup>
+    <Routes>
+      <Route
+        path="/info"
+        element={
+          <ProfileInfo
+            login={info.login}
+            name={""}
+            location={""}
+            public_repos={0}
+            created_at={""}
+          />
+        }
+      ></Route>
+      <Route path="/repos" element=""></Route>
+    </Routes>
   );
 }
 

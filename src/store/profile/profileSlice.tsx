@@ -26,13 +26,20 @@ export const getProfileRepos = createAsyncThunk(
 );
 
 interface ProfileState {
-  info: [];
+  info: {
+    login: string;
+    name: string;
+    location: string;
+    public_repos: number;
+    created_at: string;
+    avatar_url: string;
+  };
   repos: [];
   loading: "idle" | "success" | "fail" | "pending";
 }
 
 const initialState = {
-  info: [],
+  info: {},
   repos: [],
   loading: "idle",
 } as ProfileState;
