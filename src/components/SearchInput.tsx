@@ -43,7 +43,7 @@ export default function SearchInput() {
     if (profileName != "") {
       dispatch(getProfileInfo(profileName));
       dispatch(getProfileRepos(profileName));
-      navigate("/info");
+      navigate("/gh-api/info");
     }
   };
 
@@ -144,6 +144,7 @@ export default function SearchInput() {
           value={profileName}
           onChange={searchProfile}
           error={emptyInput}
+          color={themePalette === "dark" ? "success" : "primary"}
           helperText={
             profileName === "" ? "Write username" : "Hit search or enter!"
           }

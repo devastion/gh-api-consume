@@ -20,10 +20,11 @@ function TransitionedRouter() {
   const profileCreatedDate = "Created at " + selector.created_at.slice(0, 10);
   const repos = useAppSelector((state) => state.profile.repos);
 
+  // ! devastion.net/gh-api/
   return (
     <Routes>
       <Route
-        path="/info"
+        path="/gh-api/info"
         element={
           <ProfileInfo
             login={loginName}
@@ -34,7 +35,10 @@ function TransitionedRouter() {
           />
         }
       ></Route>
-      <Route path="/repos" element={<ProfileRepos repos={repos} />}></Route>
+      <Route
+        path="/gh-api/repos"
+        element={<ProfileRepos repos={repos} />}
+      ></Route>
     </Routes>
   );
 }
@@ -63,7 +67,7 @@ export default function Profile() {
         <Button
           variant="text"
           component={NavLink}
-          to="/info"
+          to="/gh-api/info"
           color={themePalette === "dark" ? "success" : "primary"}
           sx={{ mx: 3, opacity: 0.4 }}
         >
@@ -73,7 +77,7 @@ export default function Profile() {
         <Button
           variant="text"
           component={NavLink}
-          to="/repos"
+          to="/gh-api/repos"
           color={themePalette === "dark" ? "success" : "primary"}
           sx={{ mx: 3, opacity: 0.4 }}
         >

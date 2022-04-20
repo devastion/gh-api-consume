@@ -5,7 +5,14 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import LinkIcon from "@mui/icons-material/Link";
 
 type Props = {
-  repos: [{ id: number; name: string; description: string; html_url: string }];
+  repos: [
+    {
+      id: number;
+      name: string;
+      description: string;
+      html_url: string;
+    }
+  ];
 };
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -56,7 +63,12 @@ export default function ProfileRepos({ repos }: Props) {
         </Box>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <LinkIcon color={color} sx={{ mr: 1 }} />
-          <Link href={repo.html_url} underline="none" target="_blank">
+          <Link
+            href={repo.html_url}
+            underline="none"
+            color={themePalette === "dark" ? "#66bb6a" : "#1976d2"}
+            target="_blank"
+          >
             Visit the repo
           </Link>
         </Box>
