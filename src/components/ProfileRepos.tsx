@@ -76,7 +76,7 @@ export default function ProfileRepos({ repos }: Props) {
         mt: 1,
         display: "flex",
         flexFlow: "row wrap",
-        // width: "auto",
+        width: "100%",
         // justifyContent: "space-evenly",
       }}
     >
