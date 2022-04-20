@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, useTheme, Paper, styled, Stack, Link } from "@mui/material";
+import { Box, useTheme, Stack, Link } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import DescriptionIcon from "@mui/icons-material/Description";
 import LinkIcon from "@mui/icons-material/Link";
@@ -15,14 +15,6 @@ type Props = {
   ];
 };
 
-const Item = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  minWidth: 250,
-  maxWidth: 350,
-}));
-
 export default function ProfileRepos({ repos }: Props) {
   const themePalette = useTheme().palette.mode;
   const color = themePalette === "dark" ? "success" : "primary";
@@ -36,8 +28,7 @@ export default function ProfileRepos({ repos }: Props) {
           px: 5,
           py: 3,
           mt: 1,
-          minWidth: 250,
-          maxWidth: 350,
+          width: 384,
         }}
         key={repo.id}
       >
@@ -50,17 +41,19 @@ export default function ProfileRepos({ repos }: Props) {
           <FolderIcon color={color} sx={{ mr: 1 }} />
           {repo.name}
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "flex-start",
-            textAlign: "start",
-            my: 1,
-          }}
-        >
-          <DescriptionIcon color={color} sx={{ mr: 1 }} />
-          {repo.description}
-        </Box>
+        {repo.description != null ? (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "flex-start",
+              textAlign: "start",
+              my: 1,
+            }}
+          >
+            <DescriptionIcon color={color} sx={{ mr: 1 }} />
+            {repo.description}
+          </Box>
+        ) : null}
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <LinkIcon color={color} sx={{ mr: 1 }} />
           <Link
@@ -83,8 +76,8 @@ export default function ProfileRepos({ repos }: Props) {
         mt: 1,
         display: "flex",
         flexFlow: "row wrap",
-        width: "auto",
-        justifyContent: "flex-start",
+        // width: "auto",
+        // justifyContent: "space-evenly",
       }}
     >
       {reposRender.length != 0
