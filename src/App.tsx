@@ -34,11 +34,10 @@ function App() {
         backgroundColor: "background.default",
         color: "text.primary",
         borderRadius: 1,
-        p: 1,
       }}
     >
       <IconButton
-        sx={{ ml: 1, alignSelf: "flex-start" }}
+        sx={{ ml: 1, alignSelf: "flex-start", position: "fixed" }}
         onClick={colorMode.toggleColorMode}
         color="inherit"
       >
@@ -55,7 +54,6 @@ function App() {
 export default function ToggleColorMode() {
   const getLocalStoragePalette = localStorage.getItem("theme") || "dark";
 
-  // ! Find a way to validate local storage
   const validateLocalStoragePalette = (): any => {
     if (getLocalStoragePalette != null) {
       if (getLocalStoragePalette === "dark" || "light") {
@@ -92,18 +90,14 @@ export default function ToggleColorMode() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container>
+        <Container sx={{ py: 3 }}>
           <BrowserRouter>
             <App />
             <SearchInput />
             {useAppSelector((state) => state.profile.loading) != "success" ? (
               <SkeletonBody />
             ) : (
-              <Profile
-                avatar_url="https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png"
-                profile_info={[]}
-                repos={[]}
-              />
+              <Profile />
             )}
           </BrowserRouter>
         </Container>

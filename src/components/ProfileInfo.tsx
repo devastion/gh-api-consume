@@ -1,5 +1,9 @@
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import DateRangeIcon from "@mui/icons-material/DateRange";
 import { Stack, styled, Paper, useTheme } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -15,7 +19,7 @@ type Props = {
   login: string;
   name: string;
   location: string;
-  public_repos: number;
+  public_repos: string;
   created_at: string;
 };
 
@@ -34,6 +38,22 @@ export default function ProfileInfo({
       <Item sx={{ display: "flex", alignItems: "center" }}>
         <AccountCircleIcon color={color} sx={{ mr: 1 }} />
         {login}
+      </Item>
+      <Item sx={{ display: "flex", alignItems: "center" }}>
+        <EmojiEmotionsIcon color={color} sx={{ mr: 1 }} />
+        {name}
+      </Item>
+      <Item sx={{ display: "flex", alignItems: "center" }}>
+        <LocationOnIcon color={color} sx={{ mr: 1 }} />
+        {location}
+      </Item>
+      <Item sx={{ display: "flex", alignItems: "center" }}>
+        <GitHubIcon color={color} sx={{ mr: 1 }} />
+        {public_repos}
+      </Item>
+      <Item sx={{ display: "flex", alignItems: "center" }}>
+        <DateRangeIcon color={color} sx={{ mr: 1 }} />
+        {created_at}
       </Item>
     </Stack>
   );

@@ -34,13 +34,13 @@ interface ProfileState {
     created_at: string;
     avatar_url: string;
   };
-  repos: {};
+  repos: [{ id: number; name: string; description: string; html_url: string }];
   loading: "idle" | "success" | "fail" | "pending";
 }
 
 const initialState = {
   info: {},
-  repos: {},
+  repos: [{}],
   loading: "idle",
 } as ProfileState;
 

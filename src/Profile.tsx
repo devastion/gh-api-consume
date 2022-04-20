@@ -4,10 +4,21 @@ import { Box, Button, useTheme } from "@mui/material";
 import { Route, Routes, NavLink } from "react-router-dom";
 import { useAppSelector } from "./store/hooks";
 import ProfileInfo from "./components/ProfileInfo";
+import ProfileRepos from "./components/ProfileRepos";
 
 function TransitionedRouter() {
   const selector = useAppSelector((state) => state.profile.info);
   const loginName = selector.login;
+  const userName =
+    selector.name != null ? selector.name : "Person's name not found";
+  const profileLocation =
+    selector.location != null ? selector.location : "Location not found";
+  const profileRepos =
+    selector.public_repos != null
+      ? selector.public_repos + " repositories"
+      : "Repositories not found";
+  const profileCreatedDate = "Created at " + selector.created_at.slice(0, 10);
+  const repos = useAppSelector((state) => state.profile.repos);
 
   return (
     <Routes>
@@ -16,14 +27,14 @@ function TransitionedRouter() {
         element={
           <ProfileInfo
             login={loginName}
-            name={""}
-            location={""}
-            public_repos={0}
-            created_at={""}
+            name={userName}
+            location={profileLocation}
+            public_repos={profileRepos}
+            created_at={profileCreatedDate}
           />
         }
       ></Route>
-      <Route path="/repos" element=""></Route>
+      <Route path="/repos" element={<ProfileRepos repos={repos} />}></Route>
     </Routes>
   );
 }
