@@ -1,8 +1,9 @@
 import React from "react";
-import ProfileAvatar from "./components/ProfileAvatar";
 import { Box, Button, useTheme } from "@mui/material";
-import { Route, Routes, NavLink } from "react-router-dom";
-import { useAppSelector } from "./store/hooks";
+import { Route, Routes, NavLink, useLocation } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "./store/hooks";
+import { getProfileRepos } from "./store/profile/profileSlice";
+import ProfileAvatar from "./components/ProfileAvatar";
 import ProfileInfo from "./components/ProfileInfo";
 import ProfileRepos from "./components/ProfileRepos";
 
@@ -21,6 +22,15 @@ function TransitionedRouter() {
   const repos = useAppSelector((state) => state.profile.repos);
 
   // ! devastion.net/gh-api/
+  const reposPaths = ["/", "/updated", "/stars", "/forks"];
+  const reposMap = reposPaths.map((path) => (
+    <Route
+      key={path}
+      path={"/gh-api/repos" + path}
+      element={<ProfileRepos repos={repos} />}
+    />
+  ));
+
   return (
     <Routes>
       <Route
@@ -35,10 +45,8 @@ function TransitionedRouter() {
           />
         }
       ></Route>
-      <Route
-        path="/gh-api/repos"
-        element={<ProfileRepos repos={repos} />}
-      ></Route>
+      {reposMap}
+      <Route path="" element={<ProfileRepos repos={repos} />}></Route>
     </Routes>
   );
 }
@@ -48,6 +56,7 @@ export default function Profile() {
     (state) => state.profile.info.avatar_url
   );
   const themePalette = useTheme().palette.mode;
+
   return (
     <Box
       sx={{

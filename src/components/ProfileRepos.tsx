@@ -1,8 +1,9 @@
 import React from "react";
-import { Box, useTheme, Stack, Link } from "@mui/material";
+import { Box, useTheme, Stack, Link, Button } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import DescriptionIcon from "@mui/icons-material/Description";
 import LinkIcon from "@mui/icons-material/Link";
+import { NavLink } from "react-router-dom";
 
 type Props = {
   repos: [
@@ -76,19 +77,50 @@ export default function ProfileRepos({ repos }: Props) {
   });
 
   return (
-    <Stack
-      spacing={1}
-      sx={{
-        mt: 1,
-        display: "flex",
-        flexFlow: "row wrap",
-        width: "100%",
-        // justifyContent: "space-evenly",
-      }}
-    >
-      {reposRender.length != 0
-        ? reposRender
-        : "Profile doesn't contain any repositories"}
-    </Stack>
+    <>
+      <Box sx={{ mt: 3, ".active": { opacity: 1 } }}>
+        <Button
+          variant="text"
+          component={NavLink}
+          to="/gh-api/repos/updated"
+          color={color}
+          sx={{ opacity: 0.5, px: 3 }}
+        >
+          UPDATED
+        </Button>
+        <Button
+          variant="text"
+          component={NavLink}
+          to="/gh-api/repos/stars"
+          color={color}
+          sx={{ opacity: 0.5, px: 3 }}
+        >
+          STARS
+        </Button>
+        <Button
+          variant="text"
+          component={NavLink}
+          to="/gh-api/repos/forks"
+          color={color}
+          sx={{ opacity: 0.5, px: 3 }}
+        >
+          FORKS
+        </Button>
+      </Box>
+      <Stack
+        spacing={1}
+        sx={{
+          mt: 1,
+          display: "flex",
+          flexFlow: "row wrap",
+          width: "100%",
+          // justifyContent: "space-evenly",
+        }}
+      >
+        {reposRender.length != 0
+          ? reposRender
+          : "Profile doesn't contain any repositories"}
+      </Stack>
+    </>
   );
 }
