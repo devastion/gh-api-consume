@@ -26,7 +26,7 @@ function TransitionedRouter() {
     <Route
       key={path}
       path={"/gh-api/repos" + path}
-      element={<ProfileRepos repos={repos} />}
+      element={<ProfileRepos />}
     />
   ));
 
@@ -45,7 +45,6 @@ function TransitionedRouter() {
         }
       ></Route>
       {reposMap}
-      <Route path="" element={<ProfileRepos repos={repos} />}></Route>
     </Routes>
   );
 }

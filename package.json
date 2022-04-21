@@ -1,7 +1,7 @@
 {
   "name": "gh-api-consume",
   "version": "1.0.0",
-  "description": "The frontend of the fullstack project.",
+  "description": "Github API consume.",
   "scripts": {
     "start": "ntl -e start",
     "development": "npm run clean && parcel src/index.html --port 3000",
@@ -18,7 +18,7 @@
   "author": "Dimitar Banev <banev_dimitar@mail.com> (https://devastion.net/)",
   "license": "MIT",
   "devDependencies": {
-    "@parcel/transformer-typescript-tsc": "^2.4.1",
+    "@parcel/transformer-typescript-tsc": "^2.5.0",
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
     "@types/react-redux": "^7.1.24",
@@ -33,7 +33,7 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
     "ntl": "^5.1.0",
-    "parcel": "^2.4.1",
+    "parcel": "^2.5.0",
     "prettier": "^2.6.2",
     "process": "^0.11.10",
     "rimraf": "^3.0.2",
@@ -48,7 +48,7 @@
     "axios": "^0.26.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-redux": "^8.0.0",
+    "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0"
   }
 }

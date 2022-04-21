@@ -4,22 +4,23 @@ import FolderIcon from "@mui/icons-material/Folder";
 import DescriptionIcon from "@mui/icons-material/Description";
 import LinkIcon from "@mui/icons-material/Link";
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../store/hooks";
 
-type Props = {
-  repos: [
-    {
-      id: number;
-      name: string;
-      description: string;
-      html_url: string;
-      updated_at: string;
-      forks_count: number;
-      stargazers_count: number;
-    }
-  ];
-};
+// interface Repos {
+//   repos: [
+//     {
+//       id: number;
+//       name: string;
+//       description: string;
+//       html_url: string;
+//       updated_at: string;
+//       forks_count: number;
+//       stargazers_count: number;
+//     }
+//   ];
+// }
 
-export default function ProfileRepos({ repos }: Props) {
+export default function ProfileRepos() {
   const themePalette = useTheme().palette.mode;
   const color = themePalette === "dark" ? "success" : "primary";
   const MAX_LENGTH = 60;
@@ -28,8 +29,19 @@ export default function ProfileRepos({ repos }: Props) {
       ? `${description.substring(0, MAX_LENGTH)}...`
       : description;
   };
+  const selector = useAppSelector((state) => state.profile.repos);
 
-  const reposRender = repos.map((repo) => {
+  // ! Fix types!
+  const sortByStars: (number | {})[] = [];
+  selector.map((repo) => {
+    sortByStars.push([repo.stargazers_count, repo]);
+  });
+  sortByStars.sort(function (a: any, b: any) {
+    return b[0] - a[0];
+  });
+  console.log(sortByStars);
+
+  const reposRender = selector.map((repo) => {
     return (
       <Box
         sx={{

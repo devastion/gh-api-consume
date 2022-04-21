@@ -41,8 +41,8 @@ export default function SearchInput() {
 
   const fetchProfile = () => {
     if (profileName != "") {
-      dispatch(getProfileInfo(profileName));
       dispatch(getProfileRepos(profileName));
+      dispatch(getProfileInfo(profileName));
       navigate("/gh-api/info");
     }
   };
