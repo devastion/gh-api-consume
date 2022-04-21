@@ -34,7 +34,17 @@ interface ProfileState {
     created_at: string;
     avatar_url: string;
   };
-  repos: [{ id: number; name: string; description: string; html_url: string }];
+  repos: [
+    {
+      id: number;
+      name: string;
+      description: string;
+      html_url: string;
+      updated_at: string;
+      forks_count: number;
+      stargazers_count: number;
+    }
+  ];
   loading: "idle" | "success" | "fail" | "pending";
 }
 

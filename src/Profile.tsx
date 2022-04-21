@@ -1,8 +1,7 @@
 import React from "react";
 import { Box, Button, useTheme } from "@mui/material";
 import { Route, Routes, NavLink, useLocation } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "./store/hooks";
-import { getProfileRepos } from "./store/profile/profileSlice";
+import { useAppSelector } from "./store/hooks";
 import ProfileAvatar from "./components/ProfileAvatar";
 import ProfileInfo from "./components/ProfileInfo";
 import ProfileRepos from "./components/ProfileRepos";
@@ -21,7 +20,7 @@ function TransitionedRouter() {
   const profileCreatedDate = "Created at " + selector.created_at.slice(0, 10);
   const repos = useAppSelector((state) => state.profile.repos);
 
-  // ! devastion.net/gh-api/
+  // ? devastion.net/gh-api/
   const reposPaths = ["/", "/updated", "/stars", "/forks"];
   const reposMap = reposPaths.map((path) => (
     <Route
