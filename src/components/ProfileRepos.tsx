@@ -18,6 +18,12 @@ type Props = {
 export default function ProfileRepos({ repos }: Props) {
   const themePalette = useTheme().palette.mode;
   const color = themePalette === "dark" ? "success" : "primary";
+  const MAX_LENGTH = 60;
+  const descriptionLength = (description: string) => {
+    return description.length >= 68
+      ? `${description.substring(0, MAX_LENGTH)}...`
+      : description;
+  };
 
   const reposRender = repos.map((repo) => {
     return (
@@ -51,7 +57,7 @@ export default function ProfileRepos({ repos }: Props) {
             }}
           >
             <DescriptionIcon color={color} sx={{ mr: 1 }} />
-            {repo.description}
+            {descriptionLength(repo.description)}
           </Box>
         ) : null}
         <Box sx={{ display: "flex", alignItems: "center" }}>

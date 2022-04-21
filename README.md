@@ -18,7 +18,7 @@
 
 ### To do
 
-- Repo's description cut
+- ~~Repo's description cut~~
 
 - Add sort functionality (updated, stars, fork)
 
