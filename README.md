@@ -1,6 +1,6 @@
 # Github API Consume
 
-## Tech stack
+### Tech stack
 
 - React with Typescript
 
@@ -20,6 +20,10 @@
 
 - ~~Repo's description cut~~
 
-- Add sort functionality (updated, stars, fork)
+- ~~Add sort functionality (updated, stars, fork)~~
 
 - Autocomplete from previous searches
+
+- Write Typescript Types for Dates
+
+- Write tests
