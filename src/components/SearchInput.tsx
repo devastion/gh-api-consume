@@ -34,7 +34,7 @@ export default function SearchInput() {
     e.preventDefault();
     if (e.target.value.match("^[a-zA-Z0-9 ]*$") != null) {
       setEmptyInput(false);
-      setProfileName(e.target.value);
+      setProfileName(e.target.value.replace(/\s+/g, ""));
     }
     if (e.target.value === "") setEmptyInput(true);
   };

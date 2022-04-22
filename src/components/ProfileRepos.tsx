@@ -33,13 +33,12 @@ export default function ProfileRepos() {
   };
   const selector = useAppSelector((state) => state.profile.repos);
 
-  // ! Fix types
   const sortByStars: (number | {})[] = [];
   const sortByDate: (number | {})[] = [];
   const sortByForks: (number | {})[] = [];
   selector.map((repo) => {
     sortByStars.push([repo.stargazers_count, repo]);
-    sortByDate.push([new Date(repo.updated_at.slice(0, 10)), repo]);
+    sortByDate.push([new Date(repo.created_at.slice(0, 10)), repo]);
     sortByForks.push([repo.forks_count, repo]);
   });
   sortByStars.sort(function (a: any, b: any) {
@@ -54,8 +53,9 @@ export default function ProfileRepos() {
     return b[0] - a[0];
   });
 
-  const sortedByStars = sortByStars.map((repo) => repo[1]);
+  // ! Fix types
   const sortedByDate = sortByDate.map((repo) => repo[1]);
+  const sortedByStars = sortByStars.map((repo) => repo[1]);
   const sortedByForks = sortByForks.map((repo) => repo[1]);
 
   // * Repos Render - Render the array of repos
@@ -128,7 +128,7 @@ export default function ProfileRepos() {
           color={color}
           sx={{ opacity: 0.5, px: 3 }}
         >
-          UPDATED
+          RECENT
         </Button>
         <Button
           variant="text"
