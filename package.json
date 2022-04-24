@@ -6,7 +6,9 @@
     "start": "ntl -e start",
     "development": "npm run clean && parcel src/index.html --port 3000",
     "build": "npm run clean && parcel build src/index.html --public-url https://devastion.net/gh-api",
-    "clean": "rimraf ./dist && rimraf ./.parcel-cache"
+    "clean": "rimraf ./dist && rimraf ./.parcel-cache",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "ntl": {
     "descriptions": {
@@ -19,6 +21,10 @@
   "license": "MIT",
   "devDependencies": {
     "@parcel/transformer-typescript-tsc": "^2.5.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^14.1.1",
+    "@types/jest": "^27.4.1",
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
     "@types/react-redux": "^7.1.24",
@@ -33,11 +39,13 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
+    "jest": "^27.5.1",
     "ntl": "^5.1.0",
     "parcel": "^2.5.0",
     "prettier": "^2.6.2",
     "process": "^0.11.10",
     "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.4",
     "typescript": "^4.6.3"
   },
   "dependencies": {
