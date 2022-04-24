@@ -4,6 +4,7 @@
   "description": "Github API consume.",
   "scripts": {
     "start": "ntl -e start",
+    "dev:test": "concurrently -p \"[{name}]\" -n \"PARCEL,JEST\" -c \"bgBlue.bold,bgMagenta.bold\" \"parcel src/index.html --port 3000\" \"npm run test:watch\"",
     "development": "npm run clean && parcel src/index.html --port 3000",
     "build": "npm run clean && parcel build src/index.html --public-url https://devastion.net/gh-api",
     "clean": "rimraf ./dist && rimraf ./.parcel-cache",
@@ -12,6 +13,7 @@
   },
   "ntl": {
     "descriptions": {
+      "dev:test": "dev",
       "development": "Development environment",
       "build": "Production ready build",
       "clean": "Clears cache and development directory"
@@ -31,6 +33,7 @@
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
+    "concurrently": "^7.1.0",
     "eslint": "^8.13.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",

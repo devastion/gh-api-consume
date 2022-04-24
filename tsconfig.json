@@ -17,6 +17,8 @@
     "incremental": true,
     "declarationMap": true,
     "inlineSourceMap": true,
-    "inlineSources": true
+    "inlineSources": true,
+    // Just to focus on tests
+    "noImplicitAny": false
   }
 }

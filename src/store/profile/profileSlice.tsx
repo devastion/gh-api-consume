@@ -25,7 +25,7 @@ export const getProfileRepos = createAsyncThunk(
   }
 );
 
-interface ProfileState {
+export interface ProfileState {
   info: {
     login: string;
     name: string;
