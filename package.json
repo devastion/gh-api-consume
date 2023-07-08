@@ -6,7 +6,7 @@
     "start": "ntl -e start",
     "dev:test": "concurrently -p \"[{name}]\" -n \"PARCEL,JEST\" -c \"bgBlue.bold,bgMagenta.bold\" \"parcel src/index.html --port 3000\" \"npm run test:watch\"",
     "development": "npm run clean && parcel src/index.html --port 3000",
-    "build": "npm run clean && parcel build src/index.html --public-url https://devastion.github.io/gh-api-consume/",
+    "build": "npm run clean && parcel build src/index.html --public-url https://devastion.github.io/gh-api-consume/ --dist-dir build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "clean": "rimraf ./dist && rimraf ./.parcel-cache",
