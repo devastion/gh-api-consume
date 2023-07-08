@@ -6,7 +6,9 @@
     "start": "ntl -e start",
     "dev:test": "concurrently -p \"[{name}]\" -n \"PARCEL,JEST\" -c \"bgBlue.bold,bgMagenta.bold\" \"parcel src/index.html --port 3000\" \"npm run test:watch\"",
     "development": "npm run clean && parcel src/index.html --port 3000",
-    "build": "npm run clean && parcel build src/index.html --public-url https://devastion.net/gh-api",
+    "build": "npm run clean && parcel build src/index.html --public-url https://devastion.github.io/gh-api-consume/",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "clean": "rimraf ./dist && rimraf ./.parcel-cache",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -42,6 +44,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
+    "gh-pages": "^5.0.0",
     "jest": "^27.5.1",
     "ntl": "^5.1.0",
     "parcel": "^2.5.0",
